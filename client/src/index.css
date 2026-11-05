@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+
+/* Palette froide / éditoriale :
+   encre #1a1f24 · papier #f2f3f0 · carte #fbfcfb · pétrole #0f4c5c */
+@theme {
+  --color-paper: #f2f3f0;
+  --color-card: #fbfcfb;
+  --color-ink: #1a1f24;
+  --color-ink-soft: #57606a;
+  --color-rule: #d9dedd;
+  --color-accent: #0f4c5c;
+  --color-accent-soft: #dcebe9;
+  --color-danger: #a03d2e;
+  --color-danger-soft: #f2e3df;
+
+  --font-sans: 'Karla', system-ui, sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-mono: 'Fragment Mono', ui-monospace, monospace;
+
+  --shadow-card: 0 1px 2px rgb(26 31 36 / 0.07), 0 1px 1px rgb(26 31 36 / 0.04);
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-[15px] leading-normal text-ink antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-paper);
+  }
+}
