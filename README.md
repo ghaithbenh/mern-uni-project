@@ -127,6 +127,36 @@ npm install
 npm run dev              # http://localhost:5173
 ```
 
+## Tests
+
+### Serveur (`server/`)
+
+```bash
+npm test         # une passe complète
+npm run test:watch
+```
+
+- **Vitest** + **Supertest** : les requêtes passent par la vraie app Express (`src/app.ts`), sans ouvrir de port ;
+- **mongodb-memory-server** : un MongoDB jetable démarre en mémoire (aucun besoin du vrai `.env` ni d'Atlas) ;
+- `server/.env.test` fournit JWT_SECRET / ADMIN_EMAILS de test (valeurs factices, commitées volontairement) ;
+- couverture : validation des DTO, config env, JWT, flux complet d'authentification, rôle admin (impression de rôles, dernier admin protégé), permissions événements/avis (auteur vs admin), cascade avis→événement, stats admin et limiteurs de débit (429).
+
+### Client (`client/`)
+
+```bash
+npm test         # une passe complète
+npm run test:watch
+```
+
+**Vitest** (jsdom) + **Testing Library** : `cx()` et `messageErreur`, permissions d'affichage de `EventItem` (auteur / autre membre / admin / visiteur) et bascule connexion↔inscription de `AuthForm`.
+
+### CI/CD (GitHub Actions)
+
+`.github/workflows/ci.yml` lance, à chaque push et PR, deux jobs parallèles :
+
+1. **server** : `npm ci` → `typecheck` → `test` (Mongo en mémoire embarqué) ;
+2. **client** : `npm ci` → `typecheck` → `test` → `build`, le bundle est archivé en artefact.
+
 ## Déploiement
 
 1. **MongoDB Atlas** : cluster gratuit M0, utilisateur de base, Network Access `0.0.0.0/0`, copier l'URI.

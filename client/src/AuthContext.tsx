@@ -3,14 +3,14 @@ import type { ReactNode } from 'react';
 import api from './api';
 import type { AuthResponse, Role, User } from './types';
 
-interface AuthContextValue {
+export interface AuthContextValue {
   user: User | null;
   login: (email: string, motDePasse: string) => Promise<void>;
   register: (nom: string, email: string, motDePasse: string) => Promise<void>;
   logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
 const isRole = (value: unknown): value is Role => value === 'user' || value === 'admin';
 
