@@ -1,0 +1,16 @@
+{
+  "name": "le-panneau-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "mongodb-memory-server": "^11.3.0",
+    "mongoose": "^9.12.0",
+    "tsx": "^4.23.15"
+  }
+}

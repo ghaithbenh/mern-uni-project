@@ -150,6 +150,26 @@ npm run test:watch
 
 **Vitest** (jsdom) + **Testing Library** : `cx()` et `messageErreur`, permissions d'affichage de `EventItem` (auteur / autre membre / admin / visiteur) et bascule connexion↔inscription de `AuthForm`.
 
+### E2E (`e2e/`)
+
+```bash
+cd e2e
+npm install
+npx playwright install chromium
+npm test                      # navigateur réel sur les ports 5273/5050
+npm run report                # rapport HTML après une exécution
+```
+
+**Playwright** : 7 parcours navigateur de bout en bout. Les deux serveurs (API Express + MongoDB en mémoire sur :5050, front Vite sur :5273) sont lancés automatiquement par `playwright.config.ts` — aucune collision avec `npm run dev` (5000/5173). Pièce maîtresse : `e2e/api-boot.ts` définit `MONGO_URI` avant de charger le vrai `server/src/main.ts`, pour que tout le graphe serveur partage la même copie de mongoose.
+
+### Lint
+
+```bash
+npm run lint                  # racine : ESLint 9 + typescript-eslint sur client + server
+```
+
+`no-explicit-any` est en erreur (règle du projet : jamais de `any`).
+
 ### CI/CD (GitHub Actions)
 
 `.github/workflows/ci.yml` lance, à chaque push et PR, deux jobs parallèles :
