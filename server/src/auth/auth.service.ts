@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { signAccessToken } from '../common/auth/jwt.js';
 import { isAdmin } from '../common/auth/roles.js';
 import type { Role } from '../common/auth/roles.js';

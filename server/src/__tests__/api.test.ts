@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import request from 'supertest';
 import type { Express } from 'express';
 import { afterAll, describe, expect, it, vi } from 'vitest';
